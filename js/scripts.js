@@ -26,3 +26,7 @@ pokemonList[{
     type: ["electirc"]
 }
 ]
+
+for (let i = 0; i < pokemonList.length; i++) {
+    document.write(pokemonList[name])
+}
