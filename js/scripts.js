@@ -24,7 +24,7 @@ let pokemonRepository = (function () {
 
         {
             name: "Pikachu",
-            height: .05,
+            height: 0.5,
             weight: 6,
             type: ["electirc"]
         }
@@ -35,9 +35,18 @@ let pokemonRepository = (function () {
     }
 
     function add(pokemon) {
-        pokemonList.push(pokemon);
-    }
+        if (typeof pokemon === "object") {
+            if (Object.keys(pokemon)[0] === 'name' &&
+                Object.keys(pokemon)[1] === 'height' &&
+                Object.keys(pokemon)[2] === 'weight' &&
+                Object.keys(pokemon)[3] === 'type') {
+                pokemonList.push(pokemon);
+            } else {
+                return document.write(pokemon.name + " Needs more information! ")
+            }
 
+        }
+    }
 
     return {
         // refers to getAll function
@@ -51,14 +60,47 @@ let pokemonRepository = (function () {
 
 
 
-pokemonRepository.add({ name: "Caterpie" });
-pokemonRepository.add({ name: "Weedle" });
-pokemonRepository.add({ name: "Meowth" });
-pokemonRepository.add({ name: "Mew" });
-pokemonRepository.add("Mewtwo");
+pokemonRepository.add({
+    name: "Caterpie",
+    height: 0.4,
+    weight: 3,
+    type: ["bug"]
+});
+pokemonRepository.add({
+    name: "Weedle",
+    height: 0.4,
+    weight: 3,
+    type: ["bug, poison"]
+});
+pokemonRepository.add({
+    name: "Meowth",
+    height: 0.6,
+    weight: 5,
+    type: ["normal"]
+});
+pokemonRepository.add({
+    name: "Mew",
+    height: 0.5,
+    weight: 6,
+    type: ["psychic"]
+});
+pokemonRepository.add({
+    name: "Mewtwo",
+    height: 1.0,
+    weight: 10,
+    type: ["psychic"]
+});
+
+pokemonRepository.add({
+    name: "Dratini",
+});
+
+pokemonRepository.add({
+    name: "Pidgey"
+})
 
 pokemonRepository.getAll().forEach(function (pokemon) {
-    document.write(pokemon);
+    document.write(" (" + pokemon.name + ": height- " + pokemon.height + " weight- " + pokemon.weight + " type- " + pokemon.type + ")");
 });
 
 // iterates through the pokemonlist Array and finds which pokemon is bigger than 8
