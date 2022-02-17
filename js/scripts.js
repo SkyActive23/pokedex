@@ -35,16 +35,20 @@ let pokemonRepository = (function () {
     }
 
     function add(pokemon) {
+        // input must be an object
         if (typeof pokemon === "object") {
+            // object must have all keys
             if (Object.keys(pokemon)[0] === 'name' &&
                 Object.keys(pokemon)[1] === 'height' &&
                 Object.keys(pokemon)[2] === 'weight' &&
                 Object.keys(pokemon)[3] === 'type') {
                 pokemonList.push(pokemon);
             } else {
-                return document.write(pokemon.name + " Needs more information! ")
+                return document.write(" (" + pokemon.name + " Needs more information!) ")
             }
 
+        } else {
+            return document.write("(Input is not an object)")
         }
     }
 
@@ -91,14 +95,14 @@ pokemonRepository.add({
     type: ["psychic"]
 });
 
+// Added last two to show how if statements work
 pokemonRepository.add({
     name: "Dratini",
 });
 
-pokemonRepository.add({
-    name: "Pidgey"
-})
+pokemonRepository.add("Pidgey");
 
+// foreach loop accesses the key name of all object and prints it's value
 pokemonRepository.getAll().forEach(function (pokemon) {
     document.write(" (" + pokemon.name + ": height- " + pokemon.height + " weight- " + pokemon.weight + " type- " + pokemon.type + ")");
 });
