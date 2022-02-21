@@ -29,11 +29,11 @@ let pokemonRepository = (function () {
             type: ["electirc"]
         }
     ]
-
+    // pulls information from the pokemonlist
     function getAll() {
         return pokemonList;
     }
-
+    // adds new pokemon to the pokemon list
     function add(pokemon) {
         // input must be an object
         if (typeof pokemon === "object") {
@@ -52,7 +52,7 @@ let pokemonRepository = (function () {
         }
 
     }
-
+    // creates list item and text and then appends them to the ul in the HTML.
     function addListItem(pokemon) {
         let pokemonItem = document.querySelector(".pokemon-list");
         let listItem = document.createElement('li');
@@ -117,7 +117,7 @@ pokemonRepository.add({
 
 pokemonRepository.add("Pidgey");
 
-// foreach loop accesses the key name of all object and prints it's value
+// foreach loop accesses the key name of each objects and prints their value.
 pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
 });
