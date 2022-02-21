@@ -52,6 +52,11 @@ let pokemonRepository = (function () {
         }
 
     }
+
+    function showDetails(pokemon) {
+        console.log(pokemon);
+    }
+
     // creates list item and text and then appends them to the ul in the HTML.
     function addListItem(pokemon) {
         let pokemonItem = document.querySelector(".pokemon-list");
@@ -61,7 +66,11 @@ let pokemonRepository = (function () {
         button.classList.add("button");
         listItem.appendChild(button);
         pokemonItem.appendChild(listItem);
+        button.addEventListener('click', function () {
+            showDetails(pokemon);
+        });
     }
+
 
     return {
         // refers to getAll function
@@ -70,8 +79,11 @@ let pokemonRepository = (function () {
         // refers to add function
         add: add,
 
-        // refers to addListItem
-        addListItem: addListItem
+        // refers to addListItem function
+        addListItem: addListItem,
+
+        // refers to showDetails function
+        showDetails: showDetails
 
     };
 })();
