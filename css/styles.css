@@ -1,15 +1,18 @@
+/* CSS Variables */
 :root {
     --primary-color: #c41509;
     --secondary-color: #fff;
     --backgroud-color: lightgrey;
     --black: #000;
-  }
+}
 
+/* adds container to the whole web page */
 .container {
     width: 90%;
     max-width: 1200px;
 }
 
+/* styles the whole webpage throught the body tag */
 body {
     background-color: var(--backgroud-color);
     border: 4px solid var(--black);
@@ -22,11 +25,13 @@ body {
     margin:15px;
 }
 
+/* header style */
 h1 {
     color: var(--primary-color);
     text-align: center;
 }
 
+/* button styles */
 .button {
     position: relative;
     font-family: inherit;
