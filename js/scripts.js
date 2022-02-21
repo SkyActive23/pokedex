@@ -50,6 +50,17 @@ let pokemonRepository = (function () {
         } else {
             return document.write("(Input is not an object)")
         }
+
+    }
+
+    function addListItem(pokemon) {
+        let pokemonItem = document.querySelector(".pokemon-list");
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerHTML = pokemon.name;
+        button.classList.add("button");
+        listItem.appendChild(button);
+        pokemonItem.appendChild(listItem);
     }
 
     return {
@@ -57,7 +68,11 @@ let pokemonRepository = (function () {
         getAll: getAll,
 
         // refers to add function
-        add: add
+        add: add,
+
+        // refers to addListItem
+        addListItem: addListItem
+
     };
 })();
 
@@ -104,8 +119,9 @@ pokemonRepository.add("Pidgey");
 
 // foreach loop accesses the key name of all object and prints it's value
 pokemonRepository.getAll().forEach(function (pokemon) {
-    document.write(" (" + pokemon.name + ": height- " + pokemon.height + " weight- " + pokemon.weight + " type- " + pokemon.type + ")");
+    pokemonRepository.addListItem(pokemon);
 });
+
 
 // iterates through the pokemonlist Array and finds which pokemon is bigger than 8
 // for (let i = 0; i < pokemonList.length; i++) {
