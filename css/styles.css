@@ -8,6 +8,7 @@
 
 /* adds container to the whole web page */
 .container {
+    margin: 0;
     width: 90%;
     max-width: 1200px;
 }
@@ -52,6 +53,10 @@ h1 {
     color: var(--primary-color);
     border: var(--primary-color) solid 5px;
     background: var(--secondary-color);
+    /* lets the mouse appear as a hand when hovering over the button */
+    cursor: pointer;
+    /* reduces the opacity of the button to 80% */
+    opacity: 0.8;
 }
 
 .pokemon-list {
