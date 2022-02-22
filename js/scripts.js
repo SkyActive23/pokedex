@@ -1,60 +1,60 @@
 let pokemonRepository = (function () {
 
-    let pokemonList = [
-        {
-            name: "Squirtle",
-            height: 0.8,
-            weight: 9,
-            type: ["water"]
-        },
+    let pokemonList = []
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-        {
-            name: "Charmander",
-            height: 1.0,
-            weight: 10,
-            type: ["fire"]
-        },
-
-        {
-            name: "Bulbasaur",
-            height: 0.6,
-            weight: 9,
-            type: ["grass, poison"]
-        },
-
-        {
-            name: "Pikachu",
-            height: 0.5,
-            weight: 6,
-            type: ["electirc"]
-        }
-    ]
     // pulls information from the pokemonlist
     function getAll() {
         return pokemonList;
     }
+
     // adds new pokemon to the pokemon list
     function add(pokemon) {
         // input must be an object
-        if (typeof pokemon === "object") {
-            // object must have all keys
-            if (Object.keys(pokemon)[0] === 'name' &&
-                Object.keys(pokemon)[1] === 'height' &&
-                Object.keys(pokemon)[2] === 'weight' &&
-                Object.keys(pokemon)[3] === 'type') {
-                pokemonList.push(pokemon);
-            } else {
-                return document.write(" (" + pokemon.name + " Needs more information!) ")
-            }
-
+        if (typeof pokemon === "object" &&
+            "detailsUrl" in pokemon
+        ) {
+            pokemonList.push(pokemon)
         } else {
-            return document.write("(Input is not an object)")
+            return document.write(" (" + pokemon.name + " Needs more information!) ")
         }
+    }
 
+    // Other functions remain here
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            // Now we add the details to the item
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function (e) {
+            console.error(e);
+        });
     }
 
     function showDetails(pokemon) {
-        console.log(pokemon);
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
     }
 
     // creates list item and text and then appends them to the ul in the HTML.
@@ -79,59 +79,23 @@ let pokemonRepository = (function () {
         // refers to add function
         add: add,
 
-        // refers to addListItem function
+        // refers to addListItems
         addListItem: addListItem,
 
-        // refers to showDetails function
-        showDetails: showDetails
+        // refers to loadList
+        loadList: loadList,
 
+        // refers to loadDetails
+        loadDetails: loadDetails
     };
 })();
 
-
-
-
-pokemonRepository.add({
-    name: "Caterpie",
-    height: 0.4,
-    weight: 3,
-    type: ["bug"]
-});
-pokemonRepository.add({
-    name: "Weedle",
-    height: 0.4,
-    weight: 3,
-    type: ["bug, poison"]
-});
-pokemonRepository.add({
-    name: "Meowth",
-    height: 0.6,
-    weight: 5,
-    type: ["normal"]
-});
-pokemonRepository.add({
-    name: "Mew",
-    height: 0.5,
-    weight: 6,
-    type: ["psychic"]
-});
-pokemonRepository.add({
-    name: "Mewtwo",
-    height: 1.0,
-    weight: 10,
-    type: ["psychic"]
-});
-
-// Added last two to show how if statements work
-pokemonRepository.add({
-    name: "Dratini",
-});
-
-pokemonRepository.add("Pidgey");
-
 // foreach loop accesses the key name of each objects and prints their value.
-pokemonRepository.getAll().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+    // Now the data is loaded!
+    pokemonRepository.getAll().forEach(function (pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
 
 
