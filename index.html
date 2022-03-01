@@ -21,11 +21,19 @@
 
             </nav>
         </header>
-        <section>
-            <h1>Pokedex</h1>
-            <!-- li is added through js file -->
-            <ul class="pokemon-list"></ul>
-
+        <section class="pokedex">
+            <!-- Container for the loading spinner animation -->
+            <div id="loading-container"></div>
+            <div class="pokemon-container">
+                <!-- Modal -->
+                <h1>Pokedex</h1>
+                <ul class="pokemon-list"></ul>
+                <!-- li element created in ul called listItem -->
+                <!-- button created inside li called button-->
+                <div id='modal-container'></div>
+                <div class="button-wrapper"></div>
+                <div id='image-container'></div>
+            </div>
         </section>
         <footer>
 
