@@ -180,13 +180,5 @@ pokemonRepository.loadList().then(function () {
 });
 
 
-// iterates through the pokemonlist Array and finds which pokemon is bigger than 8
-// for (let i = 0; i < pokemonList.length; i++) {
 
-//     if (pokemonList[i].weight > 8) {
-//         document.write(pokemonList[i].name + ' (Height: ' + pokemonList[i].height + ', ' + 'Weight: ' + pokemonList[i].weight + ')' + ' This pokemon is heavy. ');
-//     } else {
-//         document.write(pokemonList[i].name + ' (Height: ' + pokemonList[i].height + ', ' + 'Weight: ' + pokemonList[i].weight + ')' + ' This pokemon is light. ');
-//     }
-// }
 
