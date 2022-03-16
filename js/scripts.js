@@ -11,12 +11,12 @@ let pokemonRepository = (function () {
     // adds new pokemon to the pokemon list
     function add(pokemon) {
         // input must be an object
-        if (typeof pokemon === "object" &&
-            "detailsUrl" in pokemon
+        if (typeof pokemon === 'object' &&
+            'detailsUrl' in pokemon
         ) {
             pokemonList.push(pokemon)
         } else {
-            return document.write(" (" + pokemon.name + " Needs more information!) ")
+            return document.write(' (' + pokemon.name + ' Needs more information!) ')
         }
     }
 
@@ -105,16 +105,16 @@ let pokemonRepository = (function () {
 
     // creates list item and text and then appends them to the ul in the HTML.
     function addListItem(pokemon) {
-        let pokemonItem = document.querySelector(".list-group");
+        let pokemonItem = document.querySelector('.list-group');
         let listItem = document.createElement('li');
         let button = document.createElement('button');
         button.innerHTML = pokemon.name;
-        button.classList.add("btn-primary");
-        listItem.classList.add("group-list-item")
-        button.classList.add("btn");
+        button.classList.add('btn-primary');
+        listItem.classList.add('group-list-item')
+        button.classList.add('btn');
         listItem.appendChild(button);
         pokemonItem.appendChild(listItem);
-        button.addEventListener("click", function () {
+        button.addEventListener('click', function () {
             showDetails(pokemon)
         })
     }
@@ -139,7 +139,7 @@ let pokemonRepository = (function () {
 
         // creating img in modal content
         let pokemonImage = $('<img class="modal-img" style="width:50%">');
-        pokemonImage.attr("src", pokemon.imageUrl);
+        pokemonImage.attr('src', pokemon.imageUrl);
 
         modalTitle.append(pokemonName); // pokemonName is displayed as the title in the modal
         modalBody.append(pokemonHeight); // pokemonHeight is displayed in the body of the modal
